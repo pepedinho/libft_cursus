@@ -89,4 +89,38 @@ int main(void)
 
 	printf("reel : %d\n", atoi(nbr_test_atoi));
 	printf("me : %d\n", ft_atoi(nbr_test_atoi));
+
+	//calloc
+	char *result;
+    int i = 0;
+
+    result = calloc(10, 0);
+    if (result == NULL)
+    {
+        printf("NULL\n");
+        free(result);
+    }
+    else
+        while (i < 10)
+        {
+            if (result[i] == '\0')
+                printf("c'est bon %d\n", i);
+            i++;
+        }
+    i = 0;
+    result = ft_calloc(10, 0);
+    if (result == NULL)
+    {
+        printf("NULL\n");
+        free(result);
+    }
+    else
+        while (i < 10)
+        {
+            if (result[i] == '\0')
+                printf("c'est bon %d\n", i);
+            i++;
+        }
+
+	
 }

@@ -6,7 +6,7 @@
 /*   By: itahri <itahri@contact.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/23 17:57:04 by itahri            #+#    #+#             */
-/*   Updated: 2024/03/23 18:16:01 by itahri           ###   ########.fr       */
+/*   Updated: 2024/03/23 19:09:19 by itahri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,4 +42,15 @@ int	ft_atoi(const char *nptr)
 	if (is_negative % 2 != 0)
 		result = -result;
 	return (result);
+}
+
+
+#include <stdio.h>
+#include <stdlib.h>
+int main()
+{
+	char nbr_test_atoi[] = "999999999999999999999999999999999999999999999999999";
+
+	printf("reel : %d\n", atoi(nbr_test_atoi));
+	printf("me : %d\n", ft_atoi(nbr_test_atoi));
 }
