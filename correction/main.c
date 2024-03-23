@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <bsd/string.h>
+#include <stdlib.h>
 
 int main(void)
 {
@@ -75,4 +76,17 @@ int main(void)
 
 	printf("%s\n", ft_memchr(test_ft_memset, car, 4));
 	printf("%s\n", memchr(test_ft_memset, car, 4));
+
+	//memcmp
+	char s1_test_memcmp[] = "Bonjour";
+    char s2_test_memcmp[] = "Bonsoir";
+
+    printf("me : %d\n", ft_memcmp(s1_test_memcmp, s2_test_memcmp, 3));
+    printf("reel : %d\n", memcmp(s1_test_memcmp, s2_test_memcmp, 3));
+
+	//atoi
+	char nbr_test_atoi[] = "-2147483648";
+
+	printf("reel : %d\n", atoi(nbr_test_atoi));
+	printf("me : %d\n", ft_atoi(nbr_test_atoi));
 }

@@ -6,7 +6,7 @@
 /*   By: itahri <itahri@contact.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/23 02:26:00 by itahri            #+#    #+#             */
-/*   Updated: 2024/03/23 16:31:36 by itahri           ###   ########.fr       */
+/*   Updated: 2024/03/23 17:22:51 by itahri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,11 @@ int	ft_strncmp(const char *s1, const char*s2, size_t n)
 	size_t	i;
 
 	i = 0;
-	while (i < n - 1 && s1[i] == s2[i] && s1[i] && s2[i])
+	while (i < n && s1[i] && s2[i])
+	{
+		if (s1[i] != s2[i])
+			return (s1[i] - s2[i]);
 		i++;
-	return (s1[i] - s2[i]);
+	}
+	return (0);
 }

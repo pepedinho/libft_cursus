@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_strstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: itahri <itahri@contact.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/22 20:44:38 by itahri            #+#    #+#             */
-/*   Updated: 2024/03/23 17:46:18 by itahri           ###   ########.fr       */
+/*   Created: 2024/03/23 17:32:14 by itahri            #+#    #+#             */
+/*   Updated: 2024/03/23 18:16:27 by itahri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,4 +20,29 @@ size_t	ft_strlen(char *str)
 	while (str[i])
 		i++;
 	return (i);
+}
+
+char	*ft_strstr(const char *haystack, const char *needle)
+{
+	int		i;
+	int		j;
+	size_t	temp_i;
+
+	i = 0;
+	while (haystack[i])
+	{
+		j = 0;
+		if (haystack[i] == needle[j])
+		{
+			temp_i = i;
+			while (haystack[temp_i] == needle[j] && needle[j])
+			{
+				temp_i++;
+				j++;
+			}
+			if (temp_i == ft_strlen(needle))
+				return (&haystack[i]);
+		}
+	}
+	return (NULL);
 }
