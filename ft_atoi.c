@@ -10,6 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
+
 static int	ft_isspace(char c)
 {
 	if (c == ' ' || (c >= 9 && c <= 13))
@@ -28,9 +30,10 @@ int	ft_atoi(const char *nptr)
 	is_negative = 0;
 	while (ft_isspace(nptr[i]))
 		i++;
-	if (nptr[i] == '-')
+	if (nptr[i] == '-' || nptr[i] == '+')
 	{
-		is_negative = 1;
+		if (nptr[i] == '-')
+			is_negative = 1;
 		i++;
 	}
 	while (nptr[i] >= '0' && nptr[i] <= '9')
@@ -39,18 +42,7 @@ int	ft_atoi(const char *nptr)
 		result += nptr[i] - '0';
 		i++;
 	}
-	if (is_negative % 2 != 0)
+	if (is_negative)
 		result = -result;
 	return (result);
-}
-
-
-#include <stdio.h>
-#include <stdlib.h>
-int main()
-{
-	char nbr_test_atoi[] = "999999999999999999999999999999999999999999999999999";
-
-	printf("reel : %d\n", atoi(nbr_test_atoi));
-	printf("me : %d\n", ft_atoi(nbr_test_atoi));
 }

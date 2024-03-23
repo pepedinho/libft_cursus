@@ -10,24 +10,16 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stddef.h>
-
-size_t	ft_strlen(char *str)
-{
-	size_t	i;
-
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
-}
+#include "libft.h"
 
 char	*ft_strstr(const char *haystack, const char *needle)
 {
-	int		i;
-	int		j;
-	size_t	temp_i;
+	size_t		i;
+	size_t		j;
+	size_t		temp_i;
 
+	if (*needle == '\0')
+		return ((char *)haystack);
 	i = 0;
 	while (haystack[i])
 	{
@@ -40,9 +32,10 @@ char	*ft_strstr(const char *haystack, const char *needle)
 				temp_i++;
 				j++;
 			}
-			if (temp_i == ft_strlen(needle))
-				return (&haystack[i]);
+			if (j == ft_strlen(needle))
+				return ((char *)&haystack[i]);
 		}
+		i++;
 	}
 	return (NULL);
 }

@@ -122,5 +122,51 @@ int main(void)
             i++;
         }
 
+	//strdup
+	char	test_strdup[] = "ceci est un test";
+	char 	*ptr;
+
+	ptr = strdup(test_strdup);
+	printf("reel : %s\n", ptr, ft_strlen(ptr));
+	ptr = ft_strdup(test_strdup);
+	printf("me : %s\n", ptr, ft_strlen(ptr));
 	
+	//ft_substr
+	char	str[] = "ceci est un test";
+	char	*result;
+
+	result = ft_substr(str, 12, 3);
+	printf("%s\n", result);
+
+	//strstr
+	const char *haystack1 = "hello world";
+    const char *needle1 = "world";
+    const char *haystack2 = "hello world";
+    const char *needle2 = "goodbye";
+    const char *haystack3 = "hello world";
+    const char *needle3 = "";
+    const char *haystack4 = "";
+    const char *needle4 = "hello";
+
+    printf("Test 1:\n");
+    printf("ft_strstr: %s\n", ft_strstr(haystack1, needle1));
+    printf("strstr: %s\n", strstr(haystack1, needle1));
+
+    printf("Test 2:\n");
+    printf("ft_strstr: %s\n", ft_strstr(haystack2, needle2));
+    printf("strstr: %s\n", strstr(haystack2, needle2));
+
+    printf("Test 3:\n");
+    printf("ft_strstr: %s\n", ft_strstr(haystack3, needle3));
+    printf("strstr: %s\n", strstr(haystack3, needle3));
+
+    printf("Test 4:\n");
+    printf("ft_strstr: %s\n", ft_strstr(haystack4, needle4));
+    printf("strstr: %s\n", strstr(haystack4, needle4));
+
+	//ft_strjoin
+	char	test_str_join[] = "ceci est ";
+	char	test_str_join2[] = "un test";
+
+	printf("%s\n", ft_strjoin(test_str_join, test_str_join2));
 }
