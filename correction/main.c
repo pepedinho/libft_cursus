@@ -68,4 +68,11 @@ int main(void)
 
 	printf("moi : %d\n", ft_strncmp(test_strcmp, test_strcmp2, 3));
 	printf("reel : %d\n", strncmp(test_strcmp, test_strcmp2, 3));
+
+	//memchr
+	char	test_ft_memset[] = "salut";
+	int		car = 'a';
+
+	printf("%s\n", ft_memchr(test_ft_memset, car, 4));
+	printf("%s\n", memchr(test_ft_memset, car, 4));
 }

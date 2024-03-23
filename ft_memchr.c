@@ -1,23 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncmp.c                                       :+:      :+:    :+:   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: itahri <itahri@contact.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/23 02:26:00 by itahri            #+#    #+#             */
-/*   Updated: 2024/03/23 16:31:36 by itahri           ###   ########.fr       */
+/*   Created: 2024/03/23 16:09:39 by itahri            #+#    #+#             */
+/*   Updated: 2024/03/23 16:55:36 by itahri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stddef.h>
+#include <string.h>
 
-int	ft_strncmp(const char *s1, const char*s2, size_t n)
+void	*ft_memchr(const void *s, int c, size_t n)
 {
-	size_t	i;
+	size_t			i;
+	unsigned char	*n_s;
 
+	n_s = (unsigned char *)s;
 	i = 0;
-	while (i < n - 1 && s1[i] == s2[i] && s1[i] && s2[i])
+	while (i < n)
+	{
+		if (n_s[i] == (unsigned char)c)
+			return (&n_s[i]);
 		i++;
-	return (s1[i] - s2[i]);
+	}
+	return (NULL);
 }
