@@ -29,6 +29,20 @@ static int	ft_count_words(char const *str, char sep)
 	return (count);
 }
 
+char test_ft_mappi(unsigned int index, char c) {
+	(void)index;
+    if (c >= 'a' && c <= 'z') {
+        return c - 'a' + 'A'; 
+    }
+    return c;
+}
+
+void	print_test_ietri(unsigned int i, char *s)
+{
+	(void)i;
+	printf("%c", *s);
+}
+
 
 int main(void)
 {
@@ -224,4 +238,14 @@ int main(void)
 
 	//ft_itoa 
 	printf("%s\n", ft_itoa(-2147483648));
+
+	//ft_strmapi
+	char str_test_mapi[] = "ceci est un test";
+	printf("avant : %s\n", str_test_mapi);
+	printf("apres : %s\n", ft_strmapi(str_test_mapi, &test_to_upper));
+
+	//ft_striteri
+	char str_test_striteri[] = "ceci est un test";
+
+	ft_striteri(str_test_striteri, &print_test);
 }
