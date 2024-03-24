@@ -2,6 +2,34 @@
 #include <bsd/string.h>
 #include <stdlib.h>
 
+
+
+static int	ft_count_words(char const *str, char sep)
+{
+	int		count;
+	int		bol;
+	size_t	i;
+
+	bol = 1;
+	i = 0;
+	count = 0;
+	while (str[i] == sep)
+		i++;
+	while (str[i])
+	{
+		if (str[i] == sep)
+			bol = 1;
+		else if (str[i] != sep && bol == 1)
+		{
+			count++;
+			bol = 0;
+		}
+		i++;
+	}
+	return (count);
+}
+
+
 int main(void)
 {
 
@@ -168,5 +196,29 @@ int main(void)
 	char	test_str_join[] = "ceci est ";
 	char	test_str_join2[] = "un test";
 
+	//ft_strtrim
+	char	set[] = "asult";
+	char	str[] = "salut la compagnie salfut";
+
+	printf("%s\n", ft_strtrim(str, set));
+
 	printf("%s\n", ft_strjoin(test_str_join, test_str_join2));
+
+	//ft_split
+	char	str_test_for_split[] = "          ceci       est        un      test      ";
+	char	**test_result_split;
+	int		index_split;
+	int		count_split;
+
+	printf("%s\n", str_test_for_split);
+	test_result_split = ft_split(str_test_for_split, ' ');
+	index_split = 0;
+	count_split = ft_count_words(str_test_for_split, ' ');
+
+	printf("nombre de mots : %d\n", count_split);
+	while (index_split < count_split)
+	{
+		printf("%s\n", test_result_split[index_split]);
+		index_split++;
+	}
 }
