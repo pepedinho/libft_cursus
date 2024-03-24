@@ -14,10 +14,15 @@
 
 int	ft_toupper(int c)
 {
-	if (ft_isalpha(c))
+	unsigned char	t_c;
+
+	if (c == -1)
+		return (c);
+	t_c = (unsigned char)c;
+	if (ft_isalpha(t_c))
 	{
-		if (c >= 'a' && c <= 'z')
-			return (c - 32);
+		if (t_c >= 'a' && t_c <= 'z')
+			return (t_c - 32);
 	}
-	return (c);
+	return (t_c);
 }

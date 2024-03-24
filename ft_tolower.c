@@ -14,10 +14,15 @@
 
 int	ft_tolower(int c)
 {
-	if (ft_isalpha(c))
+	unsigned char	t_c;
+
+	if (c == -1)
+		return (c);
+	t_c = (unsigned char)c;
+	if (ft_isalpha(t_c))
 	{
-		if (c >= 'A' && c <= 'Z')
-			return (c + 32);
+		if (t_c >= 'A' && t_c <= 'Z')
+			return (t_c + 32);
 	}
-	return (c);
+	return (t_c);
 }
