@@ -221,4 +221,7 @@ int main(void)
 		printf("%s\n", test_result_split[index_split]);
 		index_split++;
 	}
+
+	//ft_itoa 
+	printf("%s\n", ft_itoa(-2147483648));
 }
