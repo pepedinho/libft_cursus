@@ -1,23 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_toupper.c                                       :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: itahri <itahri@contact.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/23 00:42:43 by itahri            #+#    #+#             */
-/*   Updated: 2024/03/24 17:35:45 by itahri           ###   ########.fr       */
+/*   Created: 2024/03/24 17:58:07 by itahri            #+#    #+#             */
+/*   Updated: 2024/03/24 18:07:20 by itahri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_toupper(int c)
+void	ft_putnbr_fd(int n, int fd)
 {
-	if (ft_isalpha(c))
+	char	nbr;
+
+	if (n == -2147483648)
 	{
-		if (c >= 'a' && c <= 'z')
-			return (c - 32);
+		write(fd, "-2147483648", 12);
+		return ;
 	}
-	return (c);
+	if (n < 0)
+		n = -n;
+	if (n >= 10)
+		ft_putnbr_fd(n / 10, fd);
+	nbr = (n % 10) + '0';
+	write(fd, &nbr, 1);
 }

@@ -1,23 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_toupper.c                                       :+:      :+:    :+:   */
+/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: itahri <itahri@contact.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/23 00:42:43 by itahri            #+#    #+#             */
-/*   Updated: 2024/03/24 17:35:45 by itahri           ###   ########.fr       */
+/*   Created: 2024/03/24 17:45:22 by itahri            #+#    #+#             */
+/*   Updated: 2024/03/24 18:06:56 by itahri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_toupper(int c)
+void	ft_putendl_fd(char *s, int fd)
 {
-	if (ft_isalpha(c))
+	size_t	i;
+
+	i = 0;
+	while (s[i])
 	{
-		if (c >= 'a' && c <= 'z')
-			return (c - 32);
+		write(fd, &s[i], 1);
+		i++;
 	}
-	return (c);
+	write(fd, "\n", 1);
 }

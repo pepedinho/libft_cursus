@@ -248,4 +248,9 @@ int main(void)
 	char str_test_striteri[] = "ceci est un test";
 
 	ft_striteri(str_test_striteri, &print_test);
+
+	//ft_putnbr_fd
+	printf("putnbr_fd : ");
+	ft_putnbr_fd(-2147483648, 1);
+	printf("\n");
 }
