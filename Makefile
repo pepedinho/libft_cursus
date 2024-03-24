@@ -38,14 +38,14 @@ SRCS = ft_atoi.c \
  
  OBJS =  $(SRCS:.c=.o)
 
- INCLUDES = libft.h
  CC = gcc
- CFLAGS = -Wall -Wextra -Werror -I$(INCLUDES)
+ CFLAGS = -Wall -Wextra -Werror 
 
  all:$(NAME) clean
 
  $(NAME): $(OBJS)
 	ar rcs $(NAME) $(OBJS)
+
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
