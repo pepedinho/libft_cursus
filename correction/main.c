@@ -286,4 +286,30 @@ int main(void)
 	//printf("putnbr_fd : ");
 	ft_putnbr_fd(-2147483648, 1);
 	printf("\n");
+
+	//BONUS
+	   int *integer_content = malloc(sizeof(int));
+    *integer_content = 42;
+    t_list *new_node_int = ft_lstnew(integer_content);
+    
+
+    char *string_content = "Hello, world!";
+    t_list *new_node_str = ft_lstnew(string_content);
+    
+    if (new_node_int) {
+        printf("Nouveau noeud avec contenu entier : %d\n", *(int*)new_node_int->content);
+    } else {
+        printf("Erreur lors de la création du nouveau noeud avec contenu entier.\n");
+    }
+    
+    if (new_node_str) {
+        printf("Nouveau noeud avec contenu chaîne de caractères : %s\n", (char*)new_node_str->content);
+    } else {
+        printf("Erreur lors de la création du nouveau noeud avec contenu chaîne de caractères.\n");
+    }
+    
+    free(integer_content);
+    free(new_node_int);
+    free(new_node_str);
+    
 }
