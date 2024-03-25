@@ -288,7 +288,8 @@ int main(void)
 	printf("\n");
 
 	//BONUS
-	   int *integer_content = malloc(sizeof(int));
+	//ft_lstnew
+	int *integer_content = malloc(sizeof(int));
     *integer_content = 42;
     t_list *new_node_int = ft_lstnew(integer_content);
     
@@ -311,5 +312,81 @@ int main(void)
     free(integer_content);
     free(new_node_int);
     free(new_node_str);
+
+
+	//ft_lstadd_front
+			// Création de quelques éléments pour la liste chaînée
+	t_list *elem1 = malloc(sizeof(t_list));
+	t_list *elem2 = malloc(sizeof(t_list));
+	t_list *elem3 = malloc(sizeof(t_list));
+
+	if (!elem1 || !elem2 || !elem3)
+	{
+		perror("Erreur d'allocation mémoire");
+		return (1);
+	}
+
+	// Initialisation du contenu des éléments
+	elem1->content = "[1]->";
+	elem1->next = NULL;
+
+	elem2->content = "[2]->";
+	elem2->next = NULL;
+
+	elem3->content = "[3]->";
+	elem3->next = NULL;
+
+	// Création de la liste chaînée
+	t_list *lst = NULL; // Initialisation de la liste chaînée
+
+	// Ajout des éléments à la liste chaînée
+	ft_lstadd_front(&lst, elem2); // Ajout de elem2 en tête
+	ft_lstadd_front(&lst, elem1); // Ajout de elem1 en tête
+	ft_lstadd_front(&lst, elem3); // Ajout de elem3 en tête
+
+	// Affichage des éléments de la liste chaînée
+	t_list *current = lst; // Pointeur pour parcourir la liste
+	while (current)
+	{
+		printf("%s", (char *)current->content);
+		current = current->next;
+	}
+	printf("\n");
+	// Libération de la mémoire des éléments
+	free(elem1);
+	free(elem2);
+	free(elem3);
+
+	//FT_LSTSIZE
+	// Création de quelques éléments de la liste
+	t_list *elem1_testsize = malloc(sizeof(t_list));
+	t_list *elem2_testsize = malloc(sizeof(t_list));
+	t_list *elem3_testsize = malloc(sizeof(t_list));
+
+	// Initialisation du contenu des éléments (pour cet exemple, on utilise des int)
+	int content1_ts = 42;
+	int content2_ts = 64;
+	int content3_ts = 128;
+
+	elem1_testsize->content = &content1_ts;
+	elem1_testsize->next = elem2_testsize;
+	elem2_testsize->content = &content2_ts;
+	elem2_testsize->next = elem3_testsize;
+	elem3_testsize->content = &content3_ts;
+	elem3_testsize->next = NULL;
+    
+    t_list *test = ft_lstnew("youhou");
+    ft_lstadd_front(&elem1_testsize, test);
+
+	// Appel de la fonction ft_lstsize pour compter le nombre d'éléments
+	int size = ft_lstsize(elem1_testsize);
+
+	// Affichage du résultat
+	printf("Taille de la liste : %d\n", size);
+
+	// Libération de la mémoire (optionnel dans ce cas car nous utilisons des pointeurs alloués statiquement)
+	free(elem1_testsize);
+	free(elem2_testsize);
+	free(elem3_testsize);
     
 }
