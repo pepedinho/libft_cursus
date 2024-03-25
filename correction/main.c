@@ -9,6 +9,25 @@ static void	del(void *content)
 	free(content);
 }
 
+void *change_capitalization(void *str) {
+    char *s = (char *)str;
+    for (int i = 0; s[i] != '\0'; i++) {
+        if (s[i] >= 'a' && s[i] <= 'z') {
+            s[i] -= 32; // Convertir en majuscule
+        }
+    }
+    return ((void *)s);
+}
+
+// Fonction pour afficher les éléments de la liste
+static void    print_list(t_list *lst) {
+    while (lst) {
+        printf("%s -> ", (char *)lst->content);
+        lst = lst->next;
+    }
+    printf("NULL\n");
+}
+
 static int	ft_count_words(char const *str, char sep)
 {
 	int		count;
@@ -46,6 +65,10 @@ void	print_test_ietri(unsigned int i, char *s)
 {
 	(void)i;
 	printf("%c", *s);
+}
+
+void print_content(void *content) {
+    printf("%s", (char *)content); // Supposons que le contenu soit une chaîne de caractères
 }
 
 char test_to_upper(unsigned int index, char c)
@@ -548,5 +571,50 @@ int main(void)
     else
     {
         printf("Erreur: La liste n'a pas été correctement vidée.\n");
+    }
+
+	//FT_LSTITER
+	 t_list *element_test_lstiter1 = malloc(sizeof(t_list));
+    element_test_lstiter1->content = "Element 1";
+    
+    t_list *element_test_lstiter2 = malloc(sizeof(t_list));
+    element_test_lstiter2->content = "Element 2";
+    
+    t_list *element_test_lstiter3 = malloc(sizeof(t_list));
+    element_test_lstiter3->content = "Element 3";
+    
+    // Construction de la liste chaînée
+    element_test_lstiter1->next = element_test_lstiter2;
+    element_test_lstiter2->next = element_test_lstiter3;
+    element_test_lstiter3->next = NULL;
+
+    // Appel de ft_lstiter avec la fonction print_content
+    ft_lstiter(element_test_lstiter1, &print_content);
+
+    // Libération de la mémoire allouée pour les éléments de la liste
+    free(element_test_lstiter1);
+    free(element_test_lstiter2);
+    free(element_test_lstiter3);
+
+	//LSTMAP
+	t_list *lst_test_lstmap = NULL;
+    ft_lstadd_back(&lst_test_lstmap, ft_lstnew(strdup("salut")));
+    ft_lstadd_back(&lst_test_lstmap, ft_lstnew(strdup("la")));
+    ft_lstadd_back(&lst_test_lstmap, ft_lstnew(strdup("team!")));
+
+    printf("Liste initiale : ");
+    print_list(lst_test_lstmap);
+
+    // Application de ft_lstmap avec la fonction de changement de capitalisation
+    t_list *new_lst_test_lstmap = ft_lstmap(lst_test_lstmap, &change_capitalization, free);
+
+    printf("Nouvelle liste avec la capitalisation modifiée : ");
+    print_list(new_lst_test_lstmap);
+
+    // Libération de la mémoire
+    while (new_lst_test_lstmap) {
+        t_list *temp = new_lst_test_lstmap;
+        new_lst_test_lstmap = new_lst_test_lstmap->next;
+        free(temp);
     }
 }
