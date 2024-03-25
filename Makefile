@@ -38,6 +38,10 @@ SRCS = ft_atoi.c \
 BONUS_SRCS = ft_lstnew_bonus.c \
 			 ft_lstadd_front_bonus.c \
 			 ft_lstnew_bonus.c \
+			 ft_lstlast_bonus.c \
+			 ft_lstadd_back_bonus.c \
+			 ft_lstdelone_bonus.c \
+			 ft_lstclear_bonus.c \
 
 # Concaténation des fichiers source de base et supplémentaires
 ALL_SRCS = $(SRCS) $(BONUS_SRCS)
@@ -73,4 +77,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all bonus clean fclean re
+.PHONY: all bonus clean fclean re re_bonus

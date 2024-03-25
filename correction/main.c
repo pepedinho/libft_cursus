@@ -4,6 +4,10 @@
 
 #include "../libft.h"
 
+static void	del(void *content)
+{
+	free(content);
+}
 
 static int	ft_count_words(char const *str, char sep)
 {
@@ -388,5 +392,161 @@ int main(void)
 	free(elem1_testsize);
 	free(elem2_testsize);
 	free(elem3_testsize);
-    
+
+	//FT_LSTLAST
+	// Création manuelle de la liste chaînée
+    t_list *lst_testlast = NULL;
+
+    // Création des éléments de la liste
+    t_list *elem1_testlast = (t_list *)malloc(sizeof(t_list));
+    t_list *elem2_testlast = (t_list *)malloc(sizeof(t_list));
+    t_list *elem3_testlast = (t_list *)malloc(sizeof(t_list));
+
+    // Initialisation des données
+    elem1_testlast->content = "42";
+    elem2_testlast->content = "21";
+    elem3_testlast->content = "84";
+
+    // Liaison des éléments pour former la liste chaînée
+    elem1_testlast->next = NULL;
+    elem2_testlast->next = elem1_testlast;
+    elem3_testlast->next = elem2_testlast;
+
+    // Assignation du premier élément à la liste
+    lst_testlast = elem1_testlast;
+
+    // Test de la fonction ft_lstlast
+    t_list *last = ft_lstlast(lst_testlast);
+
+    // Affichage du dernier élément de la liste
+    if (last)
+    {
+        printf("Le dernier élément de la liste est : %s\n", (char *)last->content);
+    }
+    else
+    {
+        printf("La liste est vide.\n");
+    }
+
+    // Libération de la mémoire allouée pour les éléments
+    free(elem1_testlast);
+    free(elem2_testlast);
+    free(elem3_testlast); 
+
+	//FT_LSTDELONE
+	// Création de la liste chaînée
+	t_list *elem1 = malloc(sizeof(t_list));
+	t_list *elem2 = malloc(sizeof(t_list));
+	t_list *elem3 = malloc(sizeof(t_list));
+
+	// Allocation de mémoire pour le contenu des éléments (exemple avec des entiers)
+	int *content1 = malloc(sizeof(int));
+	int *content2 = malloc(sizeof(int));
+	int *content3 = malloc(sizeof(int));
+
+	*content1 = 42;
+	*content2 = 21;
+	*content3 = 84;
+
+	elem1->content = content1;
+	elem1->next = elem2;
+
+	elem2->content = content2;
+	elem2->next = elem3;
+
+	elem3->content = content3;
+	elem3->next = NULL;
+
+	// Affichage de la liste avant la suppression
+	t_list *current = elem1;
+	printf("Liste avant la suppression :\n");
+	while (current)
+	{
+		printf("%d -> ", *(int *)current->content);
+		current = current->next;
+	}
+	printf("NULL\n");
+
+	// Utilisation de ft_lstdelone pour supprimer elem2
+	printf("\nSuppression de l'élément 2 :\n");
+	ft_lstdelone(elem2, &del);
+
+	// Affichage de la liste après la suppression
+	current = elem1;
+	printf("Liste après la suppression :\n");
+	while (current->next)
+	{
+		printf("%d -> ", *(int *)current->content);
+		current = current->next;
+	}
+	printf("NULL\n");
+
+	// Libération de la mémoire
+	free(content1);
+	free(content3);
+	free(elem1);
+	free(elem3);
+
+	//LSTCLEAR
+	// Initialisation de la liste avec quelques éléments
+    t_list *lst = NULL;
+    t_list *new_node;
+
+    // Ajout de quelques éléments à la liste
+    for (int i = 0; i < 5; i++)
+    {
+        new_node = malloc(sizeof(t_list)); // Allocation d'un nouvel élément
+        if (!new_node)
+        {
+            perror("Erreur d'allocation de mémoire");
+            exit(EXIT_FAILURE);
+        }
+
+        new_node->content = malloc(sizeof(int)); // Allocation d'un espace pour un entier
+        if (!new_node->content)
+        {
+            perror("Erreur d'allocation de mémoire");
+            exit(EXIT_FAILURE);
+        }
+
+        *(int *)(new_node->content) = i; // Affectation d'une valeur à l'entier
+
+        new_node->next = lst; // Ajout de l'élément en tête de liste
+        lst = new_node;
+    }
+
+    // Affichage de la liste avant la suppression
+    printf("Liste avant suppression:\n");
+    t_list *current = lst;
+    while (current)
+    {
+        printf("%d -> ", *(int *)(current->content));
+        current = current->next;
+    }
+    printf("NULL\n");
+
+    // Appel de ft_lstclear pour nettoyer la liste
+    ft_lstclear(&lst->next->next, &del);
+
+
+    printf("Liste apres suppression:\n");
+	current = lst;
+	//printf("%d -> ", *(int *)(current->content));
+
+    while (current)
+    {
+        printf("%d -> ", *(int *)(current->content));
+        current = current->next;
+    }
+    printf("NULL\n");
+
+    // Vérification que la liste a été correctement vidée
+    if (!current)
+    {
+        printf("La liste a été correctement vidée.\n");
+    }
+    else
+    {
+        printf("Erreur: La liste n'a pas été correctement vidée.\n");
+    }
 }

@@ -6,7 +6,7 @@
 /*   By: itahri <itahri@contact.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/23 22:39:08 by itahri            #+#    #+#             */
-/*   Updated: 2024/03/25 17:37:14 by itahri           ###   ########.fr       */
+/*   Updated: 2024/03/25 19:47:12 by itahri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,5 +60,10 @@ void	ft_putnbr_fd(int n, int fd);
 /*BONUS*/
 t_list	*ft_lstnew(void *content);
 void	ft_lstadd_front(t_list **lst, t_list *new);
-int ft_lstsize(t_list *lst);
+int 	ft_lstsize(t_list *lst);
+t_list	*ft_lstlast(t_list *lst);
+void	ft_lstadd_back(t_list **lst, t_list *new);
+void	ft_lstdelone(t_list *lst, void (*del)(void *));
+void	ft_lstclear(t_list **lst, void (*del)(void *));
+
 #endif
