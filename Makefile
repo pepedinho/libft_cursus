@@ -24,7 +24,6 @@ SRCS = ft_atoi.c \
 	   ft_substr.c \
 	   ft_tolower.c \
 	   ft_toupper.c \
-	   ft_substr.c \
 	   ft_strjoin.c \
 	   ft_strtrim.c \
 	   ft_split.c \
@@ -34,28 +33,39 @@ SRCS = ft_atoi.c \
 	   ft_putchar_fd.c \
 	   ft_putstr_fd.c \
 	   ft_putendl_fd.c \
-	   ft_putnbr_fd.c \
- 
- OBJS =  $(SRCS:.c=.o)
+	   ft_putnbr_fd.c
 
- CC = gcc
- CFLAGS = -Wall -Wextra -Werror 
+BONUS_SRCS = ft_lstnew_bonus.c
 
- all:$(NAME) clean
+# Concaténation des fichiers source de base et supplémentaires
+ALL_SRCS = $(SRCS) $(BONUS_SRCS)
 
- $(NAME): $(OBJS)
+OBJS = $(SRCS:.c=.o)
+
+ALL_OBJS = $(ALL_SRCS:.c=.o)
+
+CC = gcc
+CFLAGS = -Wall -Wextra -Werror
+
+all: $(NAME) clean
+
+$(NAME): $(OBJS)
 	ar rcs $(NAME) $(OBJS)
-
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
+bonus: all $(ALL_OBJS) clean_bonus
+
 clean:
 	rm -f $(OBJS)
 
+clean_bonus:
+	rm -f $(ALL_OBJS)
+
 fclean: clean
-	rm -r $(NAME)
+	rm -f $(NAME)
 
-re : fclean all
+re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all bonus clean clean_bonus fclean re
