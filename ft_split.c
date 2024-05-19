@@ -53,6 +53,8 @@ static char	*fill_line(char const *word, char c, size_t len)
 	char	*result;
 
 	result = malloc(sizeof(char) * len + 1);
+	if (!result)
+		return (NULL);
 	i = 0;
 	while (i < size_of_word(word, c))
 	{
@@ -78,7 +80,7 @@ char	**ft_split(char const *s, char c)
 	if (result == NULL)
 		return (NULL);
 	i = 0;
-	while (s[i++])
+	while (s[i])
 	{
 		if (s[i] == c)
 			bol = 1;
@@ -88,6 +90,7 @@ char	**ft_split(char const *s, char c)
 			result[count] = fill_line(&s[i], c, size_of_word(&s[i], c));
 			count++;
 		}
+		i++;
 	}
 	return (result);
 }

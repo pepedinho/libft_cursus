@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdio.h>
 
 static int	is_in_set(const char *set, char c)
 {
@@ -68,3 +69,13 @@ char	*ft_strtrim(char const *s1, char const *set)
 	result[i] = '\0';
 	return (result);
 }
+
+/*
+int main()
+{
+	char s1[] = " lorem ipsum dolor sit amet";
+
+	printf("before: |%s\n", s1);
+	printf("after : |%s\n", ft_strtrim(s1, "l "));
+}
+*/
