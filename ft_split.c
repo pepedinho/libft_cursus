@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdio.h>
 
 static int	ft_count_words(char const *str, char sep)
 {
@@ -65,6 +66,15 @@ static char	*fill_line(char const *word, char c, size_t len)
 	return (result);
 }
 
+char  **empty_return(void)
+{
+	char  **str;
+
+	str = malloc(sizeof(char *) * 1);
+	str[0] = NULL;
+	return (str);
+}
+
 char	**ft_split(char const *s, char c)
 {
 	size_t	i;
@@ -73,10 +83,12 @@ char	**ft_split(char const *s, char c)
 	char	**result;
 	int		count_words;
 
+	if (s[0] == '\0' || !s)
+		return (empty_return());
 	bol = 1;
 	count = 0;
 	count_words = ft_count_words(s, c);
-	result = malloc(sizeof(char *) * count_words);
+	result = malloc(sizeof(char *) * (count_words + 1));
 	if (result == NULL)
 		return (NULL);
 	i = 0;
@@ -92,5 +104,27 @@ char	**ft_split(char const *s, char c)
 		}
 		i++;
 	}
+	result[count] = NULL;
 	return (result);
 }
+/*
+int main(void)
+{
+	char **tab;
+	char invalid[] = "\0"; 
+
+	tab = ft_split(invalid, 0);
+
+	if (tab[0])
+		printf("tab[0] : %s\n", tab[0]);
+	//printf("tab[1] : %s\n", tab[1]);
+	//if (tab[2] == NULL)
+	//	printf("OK\n");
+	//printf("tab[2] : %s\n", tab[2]);
+	//printf("nb words : %d\n", ft_count_words("  tripouille  42  ", ' '));
+	//for (int i = 0;i < 3; i++) {
+	//	free(tab[i]);
+	//}
+	//free(tab);
+}
+*/

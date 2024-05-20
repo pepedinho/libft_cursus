@@ -23,6 +23,8 @@ char	*ft_strrchr(const char *s, int c)
 	ptr = NULL;
 	if (c == '\0')
 		return ((char *)&s[ft_strlen(s)]);
+	if (c > 256)
+		return ((char *)s);
 	while (s[i])
 	{
 		if (s[i] == c)

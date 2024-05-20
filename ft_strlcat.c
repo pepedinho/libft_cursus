@@ -11,8 +11,6 @@
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <bsd/string.h>
-#include <stdio.h>
 
 static size_t	is_min(size_t size, size_t len)
 {
@@ -46,17 +44,3 @@ size_t	ft_strlcat(char *dst, const char *src, size_t size)
 	dst[i] = '\0';
 	return (ft_strlen(src) + len);
 }
-
-/*
-int main()
-{
-  //char dest1[14] = "a";
-  char dest2[14] = "a";
-
-  printf("ft return : %lu\n", ft_strlcat(dest1, "lorem ipsum dolor sit amet", 15));
-  printf("ft dest : %s\n", dest1);
-
-  printf("original return : %lu\n", strlcat(dest2, "lorem ipsum dolor sit amet", 15));
-  printf("original dest : %s\n", dest2);
-}
-*/

@@ -19,6 +19,7 @@ SRCS = ft_atoi.c \
 	   ft_strlcpy.c \
 	   ft_strlen.c \
 	   ft_strncmp.c \
+		 ft_strnstr.c \
 	   ft_strrchr.c \
 	   ft_strstr.c \
 	   ft_substr.c \
@@ -44,6 +45,7 @@ BONUS_SRCS = ft_lstnew_bonus.c \
 			 ft_lstclear_bonus.c \
 			 ft_lstiter_bonus.c \
 			 ft_lstmap_bonus.c \
+			 ft_lstsize_bonus.c
 
 # Concaténation des fichiers source de base et supplémentaires
 ALL_SRCS = $(SRCS) $(BONUS_SRCS)
@@ -53,7 +55,7 @@ OBJS = $(SRCS:.c=.o)
 ALL_OBJS = $(ALL_SRCS:.c=.o)
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g3
 
 all: $(NAME) clean
 

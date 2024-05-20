@@ -66,16 +66,15 @@ char	*ft_strtrim(char const *s1, char const *set)
 		i++;
 		k++;
 	}
-	result[i] = '\0';
+	result[k] = '\0';
 	return (result);
 }
-
 /*
 int main()
 {
-	char s1[] = " lorem ipsum dolor sit amet";
+	char s1[] = "tripouille   xxx";
 
 	printf("before: |%s\n", s1);
-	printf("after : |%s\n", ft_strtrim(s1, "l "));
+	printf("after : |%s\n", ft_strtrim(s1, " x"));
 }
 */

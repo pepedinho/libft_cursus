@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdio.h>
 
 char	*ft_strchr(const char *s, int c)
 {
@@ -19,6 +20,8 @@ char	*ft_strchr(const char *s, int c)
 
 	if (c == '\0')
 		return ((char *)&s[ft_strlen(s)]);
+	if (c > 256)
+		return ((char *)s);
 	i = 0;
 	ptr = NULL;
 	while (s[i])
