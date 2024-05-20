@@ -6,7 +6,7 @@
 /*   By: itahri <itahri@contact.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/23 22:39:08 by itahri            #+#    #+#             */
-/*   Updated: 2024/03/25 19:47:12 by itahri           ###   ########.fr       */
+/*   Updated: 2024/05/20 22:50:11 by itahri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <stdlib.h>
 # include <stddef.h>
 # include <unistd.h>
-# define  U_INT_MAX 4294967295
+# define U_INT_MAX 4294967295
 
 typedef struct s_list
 {

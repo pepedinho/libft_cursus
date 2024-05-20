@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: itahri <itahri@contact.42.fr>              #+#  +:+       +#+        */
+/*   By: itahri <itahri@contact.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024-03-24 00:19:32 by itahri            #+#    #+#             */
-/*   Updated: 2024-03-24 00:19:32 by itahri           ###   ########.fr       */
+/*   Created: 2024/03/24 00:19:32 by itahri            #+#    #+#             */
+/*   Updated: 2024/05/20 23:27:33 by itahri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,17 +38,22 @@ static int	ft_count_words(char const *str, char sep)
 	return (count);
 }
 
-static size_t	size_of_word(char const *word, char sep)
+static size_t	word_len(char const *word, char sep, int *bol, int *count)
 {
 	size_t	len;
 
 	len = 0;
 	while (word[len] && word[len] != sep)
 		len++;
+	if (bol && count)
+	{
+		*bol = 0;
+		*count = *count + 1;
+	}
 	return (len);
 }
 
-static char	*fill_line(char const *word, char c, size_t len)
+static char	*compose(char const *word, char c, size_t len)
 {
 	size_t	i;
 	char	*result;
@@ -57,7 +62,7 @@ static char	*fill_line(char const *word, char c, size_t len)
 	if (!result)
 		return (NULL);
 	i = 0;
-	while (i < size_of_word(word, c))
+	while (i < word_len(word, c, NULL, NULL))
 	{
 		result[i] = word[i];
 		i++;
@@ -66,9 +71,9 @@ static char	*fill_line(char const *word, char c, size_t len)
 	return (result);
 }
 
-char  **empty_return(void)
+char	**empty_return(void)
 {
-	char  **str;
+	char	**str;
 
 	str = malloc(sizeof(char *) * 1);
 	str[0] = NULL;
@@ -78,14 +83,14 @@ char  **empty_return(void)
 char	**ft_split(char const *s, char c)
 {
 	size_t	i;
-	int		count;
+	int		cnt;
 	int		bol;
 	char	**result;
 
 	if (s[0] == '\0' || !s)
 		return (empty_return());
 	bol = 1;
-	count = 0;
+	cnt = 0;
 	result = malloc(sizeof(char *) * (ft_count_words(s, c) + 1));
 	if (result == NULL)
 		return (NULL);
@@ -95,34 +100,30 @@ char	**ft_split(char const *s, char c)
 		if (s[i] == c)
 			bol = 1;
 		if (s[i] != c && bol == 1)
-		{
-			bol = 0;
-			result[count] = fill_line(&s[i], c, size_of_word(&s[i], c));
-			count++;
-		}
+			result[cnt - 1] = compose(&s[i], c, word_len(&s[i], c, &bol, &cnt));
 		i++;
 	}
-	result[count] = NULL;
+	result[cnt] = NULL;
 	return (result);
 }
 /*
 int main(void)
 {
 	char **tab;
-	char invalid[] = "\0"; 
+	//char invalid[] = "\0"; 
 
-	tab = ft_split(invalid, 0);
+	tab = ft_split(" tripouille xxx  ", ' ');
 
 	if (tab[0])
 		printf("tab[0] : %s\n", tab[0]);
-	//printf("tab[1] : %s\n", tab[1]);
-	//if (tab[2] == NULL)
-	//	printf("OK\n");
-	//printf("tab[2] : %s\n", tab[2]);
-	//printf("nb words : %d\n", ft_count_words("  tripouille  42  ", ' '));
-	//for (int i = 0;i < 3; i++) {
-	//	free(tab[i]);
-	//}
-	//free(tab);
+	printf("tab[1] : %s\n", tab[1]);
+	if (tab[2] == NULL)
+		printf("OK\n");
+	printf("tab[2] : %s\n", tab[2]);
+	printf("nb words : %d\n", ft_count_words("  tripouille  42  ", ' '));
+	for (int i = 0;i < 3; i++) {
+		free(tab[i]);
+	}
+	free(tab);
 }
 */
