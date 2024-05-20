@@ -81,14 +81,12 @@ char	**ft_split(char const *s, char c)
 	int		count;
 	int		bol;
 	char	**result;
-	int		count_words;
 
 	if (s[0] == '\0' || !s)
 		return (empty_return());
 	bol = 1;
 	count = 0;
-	count_words = ft_count_words(s, c);
-	result = malloc(sizeof(char *) * (count_words + 1));
+	result = malloc(sizeof(char *) * (ft_count_words(s, c) + 1));
 	if (result == NULL)
 		return (NULL);
 	i = 0;
