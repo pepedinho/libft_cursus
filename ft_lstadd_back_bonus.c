@@ -11,10 +11,12 @@
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdio.h>
 
 void	ft_lstadd_back(t_list **lst, t_list *new)
 {
 	t_list	*last_elem;
+	t_list	*new_last_elem;
 
 	if (!*lst)
 	{
@@ -23,5 +25,24 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 	}
 	last_elem = ft_lstlast(*lst);
 	last_elem->next = new;
-	new->next = NULL;
+	new_last_elem = ft_lstlast(new);
+	new_last_elem->next = NULL;
 }
+
+/*
+int main(void)
+{
+	t_list	*lst1 = NULL;
+	t_list	*lst2 = NULL;
+
+	ft_lstadd_back(&lst1, ft_lstnew((void*)1));
+	ft_lstadd_back(&lst2, ft_lstnew((void*)2));
+    ft_lstadd_back(&lst2, ft_lstnew((void*)3));
+    ft_lstadd_back(&lst1, lst2);
+
+	while (lst1) {
+		printf("%lld\n", (long long int)lst1->content);
+		lst1 = lst1->next;
+	}
+}
+*/

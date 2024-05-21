@@ -3,4 +3,5 @@ correction/
 libftTester/
 libtest/
 tester/
-a.out/
+a.out
+libft.a
