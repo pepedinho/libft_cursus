@@ -11,9 +11,7 @@
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdint.h>
 #include <stdio.h>
-#include <stdlib.h>
 
 static int	ft_count_words(char const *str, char sep)
 {
@@ -51,8 +49,11 @@ static char	**escape(char **to_free, int count, int cas)
 		str = malloc(sizeof(char *) * 1);
 		if (!str)
 			return (NULL);
-		str[0] = NULL;
-		return (str);
+		else
+		{
+			str[0] = NULL;
+			return (str);
+		}
 	}
 }
 
@@ -94,7 +95,7 @@ char	**split_it(char const *s, char **result, char c)
 		if (s[i] && s[i] != c)
 		{
 			result[cnt] = compose(s, c, i);
-			if (!result)
+			if (!result[cnt])
 				return (escape(result, cnt, 2), NULL);
 			cnt++;
 		}
@@ -107,13 +108,25 @@ char	**split_it(char const *s, char **result, char c)
 char	**ft_split(char const *s, char c)
 {
 	char	**result;
+	char	**escape_val;
 
 	if (s[0] == '\0' || !s)
-		return (escape(NULL, 0, 1));
+	{
+		escape_val = escape(NULL, 0, 1);
+		if (!escape_val)
+			return (NULL);
+		return (escape_val);
+	}
 	result = malloc(sizeof(char *) * (ft_count_words(s, c) + 1));
-	result = split_it(s, result, c);
 	if (!result)
 		return (NULL);
+	result = split_it(s, result, c);
+	if (!result)
+	{
+		if (result && !result[0])
+			free(result);
+		return (NULL);
+	}
 	return (result);
 }
 
@@ -140,13 +153,18 @@ int main(void)
 /*
 int    main(void)
 {
-	 char **tab;
-	 // char * invalidReadCheck = 0;
-	 tab = ft_split("hello!", ' ');
-	 printf("%s\n", tab[0]);
-	 printf("%s\n", tab[1]);
+	char **tab;
+	tab = ft_split("hello!", ' ');
+	if (!tab || !tab[0])
+	{
+		if (tab && !tab[0])
+			free(tab);
+		return 0;
+	}
+	printf("%s\n", tab[0]);
+	//printf("%s\n", tab[1]);
 	free(tab[0]);
-	free(tab[1]);
+	//free(tab[1]);
 	free(tab);
 }
 */
