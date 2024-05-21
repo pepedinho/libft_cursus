@@ -18,16 +18,7 @@ void	*ft_calloc(size_t nmeb, size_t size)
 	size_t	i;
 
 	if (nmeb <= 0 || size <= 0)
-	{
-		if ((int)nmeb < 0)
-			nmeb = -nmeb;
-		else if ((int)size < 0)
-			size = -size;
-		if (nmeb == 0)
-			nmeb++;
-		if (size == 0)
-			size++;
-	}
+		return (NULL);
 	else if (nmeb >= U_INT_MAX || size >= U_INT_MAX)
 		return (NULL);
 	ptr = malloc(size * nmeb);

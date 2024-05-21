@@ -34,12 +34,17 @@ static size_t	malloc_size(char const *s1, char const *set)
 	size_t	len;
 
 	len = ft_strlen(s1);
+	if (!len)
+		return (1);
 	i = 0;
+	j = 0;
 	while (is_in_set(set, s1[i]))
 		i++;
-	j = 0;
-	while (is_in_set(set, s1[len - j]))
-		j++;
+	if (s1[i] && !is_in_set(set, s1[i]))
+	{
+		while (is_in_set(set, s1[len - (j + 1)]))
+			j++;
+	}
 	return (len - (i + j) + 1);
 }
 
@@ -72,9 +77,8 @@ char	*ft_strtrim(char const *s1, char const *set)
 /*
 int main()
 {
-	char s1[] = "tripouille   xxx";
+	char *s1 = ft_strtrim("   xxx   xxx", " x");
 
-	printf("before: |%s\n", s1);
-	printf("after : |%s\n", ft_strtrim(s1, " x"));
+	printf("result: |%s\n", s1);
 }
 */

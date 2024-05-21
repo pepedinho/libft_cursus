@@ -3,127 +3,150 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: itahri <itahri@contact.42.fr>              +#+  +:+       +#+        */
+/*   By: itahri <itahri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 00:19:32 by itahri            #+#    #+#             */
-/*   Updated: 2024/05/20 23:27:33 by itahri           ###   ########.fr       */
+/*   Updated: 2024/05/21 19:37:51 by itahri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdint.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 static int	ft_count_words(char const *str, char sep)
 {
 	int		count;
-	int		bol;
 	size_t	i;
 
-	bol = 1;
 	i = 0;
 	count = 0;
-	while (str[i] == sep)
-		i++;
 	while (str[i])
 	{
-		if (str[i] == sep)
-			bol = 1;
-		else if (str[i] != sep && bol == 1)
-		{
+		while (str[i] == sep)
+			i++;
+		if (str[i] != sep && str[i])
 			count++;
-			bol = 0;
-		}
-		i++;
+		while (str[i] != sep && str[i])
+			i++;
 	}
 	return (count);
 }
 
-static size_t	word_len(char const *word, char sep, int *bol, int *count)
+static char	**escape(char **to_free, int count, int cas)
 {
-	size_t	len;
+	int		i;
+	char	**str;
 
-	len = 0;
-	while (word[len] && word[len] != sep)
-		len++;
-	if (bol && count)
+	if (cas == 2)
 	{
-		*bol = 0;
-		*count = *count + 1;
+		i = 0;
+		while (i <= count)
+			free(to_free[i++]);
+		return (free(to_free), NULL);
 	}
-	return (len);
+	else
+	{
+		str = malloc(sizeof(char *) * 1);
+		if (!str)
+			return (NULL);
+		str[0] = NULL;
+		return (str);
+	}
 }
 
-static char	*compose(char const *word, char c, size_t len)
+static char	*compose(char const *word, char c, int index)
 {
 	size_t	i;
 	char	*result;
+	size_t	w_len;
 
-	result = malloc(sizeof(char) * len + 1);
+	w_len = 0;
+	while (word[index + w_len] && word[index + w_len] != c)
+		w_len++;
+	result = malloc(sizeof(char) * w_len + 1);
 	if (!result)
 		return (NULL);
 	i = 0;
-	while (i < word_len(word, c, NULL, NULL))
+	while (i < w_len)
 	{
-		result[i] = word[i];
+		result[i] = word[index + i];
 		i++;
 	}
 	result[i] = '\0';
 	return (result);
 }
 
-char	**empty_return(void)
+char	**split_it(char const *s, char **result, char c)
 {
-	char	**str;
+	int	i;
+	int	cnt;
 
-	str = malloc(sizeof(char *) * 1);
-	str[0] = NULL;
-	return (str);
+	cnt = 0;
+	i = 0;
+	if (!result)
+		return (NULL);
+	while (s[i])
+	{
+		while (s[i] == c)
+			i++;
+		if (s[i] && s[i] != c)
+		{
+			result[cnt] = compose(s, c, i);
+			if (!result)
+				return (escape(result, cnt, 2), NULL);
+			cnt++;
+		}
+		while (s[i] != c && s[i])
+			i++;
+	}
+	return (result[cnt] = NULL, result);
 }
 
 char	**ft_split(char const *s, char c)
 {
-	size_t	i;
-	int		cnt;
-	int		bol;
 	char	**result;
 
 	if (s[0] == '\0' || !s)
-		return (empty_return());
-	bol = 1;
-	cnt = 0;
+		return (escape(NULL, 0, 1));
 	result = malloc(sizeof(char *) * (ft_count_words(s, c) + 1));
-	if (result == NULL)
+	result = split_it(s, result, c);
+	if (!result)
 		return (NULL);
-	i = 0;
-	while (s[i])
-	{
-		if (s[i] == c)
-			bol = 1;
-		if (s[i] != c && bol == 1)
-			result[cnt - 1] = compose(&s[i], c, word_len(&s[i], c, &bol, &cnt));
-		i++;
-	}
-	result[cnt] = NULL;
 	return (result);
 }
+
 /*
 int main(void)
 {
 	char **tab;
 	//char invalid[] = "\0"; 
 
-	tab = ft_split(" tripouille xxx  ", ' ');
+	printf("nb words : %d\n", ft_count_words(" s f f ||  ", ' '));
 
-	if (tab[0])
+	tab = ft_split("^^^1^^2a,^^^^3^^^^--h^^^^", '^');
+
+	if (tab && tab[0])
 		printf("tab[0] : %s\n", tab[0]);
-	printf("tab[1] : %s\n", tab[1]);
-	if (tab[2] == NULL)
-		printf("OK\n");
-	printf("tab[2] : %s\n", tab[2]);
-	printf("nb words : %d\n", ft_count_words("  tripouille  42  ", ' '));
-	for (int i = 0;i < 3; i++) {
-		free(tab[i]);
-	}
+	if (tab && tab[1])
+		printf("tab[1] : %s\n", tab[1]);
+	if (tab && tab[2])
+		printf("tab[2] : %s\n", tab[2]);
+	if (tab && tab[3])
+		printf("tab[2] : %s\n", tab[3]);
+}
+*/
+/*
+int    main(void)
+{
+	 char **tab;
+	 // char * invalidReadCheck = 0;
+	 tab = ft_split("hello!", ' ');
+	 printf("%s\n", tab[0]);
+	 printf("%s\n", tab[1]);
+	free(tab[0]);
+	free(tab[1]);
 	free(tab);
 }
 */

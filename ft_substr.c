@@ -19,23 +19,23 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	size_t	size;
 	char	*result;
 
+	if (!s)
+		return (NULL);
 	if (start > ft_strlen(s))
-		size = 0;
-	else if (len >= ft_strlen(s))
-		size = ft_strlen(&s[start]);
+		size = 1;
+	else if (len >= ft_strlen(s) && start <= ft_strlen(s))
+		size = ft_strlen(&s[start]) + 1;
+	else if (start + len > ft_strlen(s))
+		size = (len + start) - (start);
 	else
-		size = len;
-	result = malloc(sizeof(char) * (size + 1));
+		size = len + 1;
+	result = malloc(sizeof(char) * size);
 	if (!result)
 		return (NULL);
 	i = start;
 	j = 0;
 	while (start < ft_strlen(s) && s[i] && j < len)
-	{
-		result[j] = s[i];
-		i++;
-		j++;
-	}
+		result[j++] = s[i++];
 	result[j] = '\0';
 	return (result);
 }

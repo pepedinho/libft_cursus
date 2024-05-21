@@ -11,12 +11,21 @@
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdlib.h>
 
 static size_t	is_min(size_t size, size_t len)
 {
 	if (size <= len)
 		return (size);
 	return (len);
+}
+
+size_t	min(size_t size, size_t dest_len)
+{
+	if (size < dest_len)
+		return (size);
+	else
+		return (dest_len);
 }
 
 size_t	ft_strlcat(char *dst, const char *src, size_t size)
@@ -37,10 +46,10 @@ size_t	ft_strlcat(char *dst, const char *src, size_t size)
 		while (src[j] && i < size - 1)
 			dst[i++] = src[j++];
 		dst[i] = '\0';
-		return (len + ft_strlen(src));
+		return (min(size, len) + ft_strlen(src));
 	}
 	while (src[j] && i < size - 1)
 		dst[i++] = src[j++];
 	dst[i] = '\0';
-	return (ft_strlen(src) + len);
+	return (ft_strlen(src) + min(size, len));
 }

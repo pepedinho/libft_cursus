@@ -28,3 +28,16 @@ void	*ft_memcpy(void *dest, const void *src, size_t n)
 	}
 	return (dest);
 }
+/*
+#include <stdio.h>
+#include <string.h> 
+int main()
+{
+	long long int res1;
+	long long int res2;
+	res2 = (long long int)ft_memcpy(((void*)0), ((void*)0), 3);
+	res1 = (long long int)memcpy(NULL, NULL, 3);
+	printf("%lld\n", res1);
+	printf("%lld\n", res2);
+}
+*/

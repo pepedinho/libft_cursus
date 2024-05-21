@@ -15,26 +15,23 @@
 char	*ft_strrchr(const char *s, int c)
 {
 	int		i;
-	int		buff;
+	int		last_index;
 	char	*ptr;
+	char	cast_c;
 
 	i = 0;
-	buff = -1;
-	ptr = NULL;
-	if (c == '\0')
-		return ((char *)&s[ft_strlen(s)]);
-	if (c > 256)
-		return ((char *)s);
-	while (s[i])
+	last_index = -1;
+	ptr = (char *)s;
+	cast_c = (char)c;
+	while (ptr[i])
 	{
-		if (s[i] == c)
-			buff = i;
+		if (ptr[i] == cast_c)
+			last_index = i;
 		i++;
 	}
-	if (buff >= 0)
-	{
-		ptr = (char *)&s[buff];
-		return (ptr);
-	}
+	if (last_index >= 0)
+		return (&ptr[last_index]);
+	if (ptr[i] == cast_c)
+		return (&ptr[i]);
 	return (NULL);
 }

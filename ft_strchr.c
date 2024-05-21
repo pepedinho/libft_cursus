@@ -17,21 +17,18 @@ char	*ft_strchr(const char *s, int c)
 {
 	int		i;
 	char	*ptr;
+	char	cast_c;
 
-	if (c == '\0')
-		return ((char *)&s[ft_strlen(s)]);
-	if (c > 256)
-		return ((char *)s);
 	i = 0;
-	ptr = NULL;
-	while (s[i])
+	cast_c = (char)c;
+	ptr = (char *)s;
+	while (ptr[i])
 	{
-		if (s[i] == c)
-		{
-			ptr = (char *)&s[i];
-			return (ptr);
-		}
+		if (ptr[i] == cast_c)
+			return (&ptr[i]);
 		i++;
 	}
+	if (ptr[i] == cast_c)
+		return (&ptr[i]);
 	return (NULL);
 }

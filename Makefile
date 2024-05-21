@@ -57,18 +57,16 @@ ALL_OBJS = $(ALL_SRCS:.c=.o)
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -g3
 
-all: $(NAME) clean
+all: $(NAME)
 
 $(NAME): $(OBJS)
 	ar rcs $(NAME) $(OBJS)
 
-bonus_1: $(BONUS_SRCS:.c=.o) $(OBJS)
+bonus: $(BONUS_SRCS:.c=.o) $(OBJS)
 	ar rcs $(NAME) $(ALL_OBJS)
 
 %.o: %.c 
 	$(CC) $(CFLAGS) -c $< -o $@
-
-bonus : bonus_1 clean
 
 clean:
 	rm -f $(OBJS) $(ALL_OBJS)
@@ -81,4 +79,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all bonus clean fclean re re_bonus
+.PHONY: all bonus clean fclean re
