@@ -17,7 +17,7 @@ void	*ft_calloc(size_t nmeb, size_t size)
 	char	*ptr;
 	size_t	i;
 
-	if (nmeb <= 0 || size <= 0)
+	if (((long int)nmeb * (long int)size) < 0)
 		return (NULL);
 	else if (nmeb >= U_INT_MAX || size >= U_INT_MAX)
 		return (NULL);
