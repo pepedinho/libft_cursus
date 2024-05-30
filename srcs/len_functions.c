@@ -6,7 +6,7 @@
 /*   By: itahri <itahri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/25 15:51:41 by itahri            #+#    #+#             */
-/*   Updated: 2024/05/30 13:14:40 by itahri           ###   ########.fr       */
+/*   Updated: 2024/05/30 13:25:51 by itahri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,19 @@ int	convert_len(long long int nbr, char *base)
 		i++;
 	}
 	return (i);
+}
+
+int	dec_len(unsigned int nbr)
+{
+	int				len;
+	unsigned int	temp;
+
+	temp = nbr;
+	len = 0;
+	while (temp != 0)
+	{
+		temp = temp / 10;
+		len++;
+	}
+	return (len);
 }
